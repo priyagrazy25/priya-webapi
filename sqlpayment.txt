@@ -1,0 +1,43 @@
+create database payment
+
+create table paymentdetail(id varchar(50),testid varchar(30) constraint pk_testid primary key,username varchar(50),testmodel varchar(50),
+teststatus varchar(50),testdate varchar(50),result varchar(50))
+--month-date-year--
+insert into paymentdetail values('001','t1','Siva','Aptitude','completed','11/2/2019','9')
+insert into paymentdetail values('001','t2','Siva','Techinal','expired','1/23/2019','')
+insert into paymentdetail values('001','t3','Siva','Techinal','Not yet','2/2/2020','')
+insert into paymentdetail values('002','t4','Sowme','Technical','Not yet','12/13/2019','')
+insert into paymentdetail values('002','t5','Sowme','Aptitude','completed','12/7/2019','8')
+insert into paymentdetail values('003','t6','Arvind','Aptitude','expired','10/30/2019','')
+insert into paymentdetail values('003','t7','Arvind','Tecnical','Not yet','1/3/2020','')
+insert into paymentdetail values('005','t8','sss','Tecnical','Not yet','12/21/2019','')
+insert into paymentdetail values('005','t9','sss','Aptitude','expired','11/11/2019','')
+insert into paymentdetail values('005','t10','sss','Aptitude','completed','10/11/2019','5')
+insert into paymentdetail values('006','t11','devi','Tecnical','completed','10/11/2019','6')
+insert into paymentdetail values('007','t12','ram','Aptitude','Not yet','1/11/2020','')
+drop table paymentdetail
+select * from paymentdetail
+alter proc GetPaymentDetails
+as
+begin
+   select * from paymentdetail
+end
+
+exec GetPaymentDetails
+
+create procedure proc_GetuserData(@username varchar(50))
+as
+begin
+select * from paymentdetail where username=@username
+end
+
+exec proc_GetuserData 'Siva'
+
+alter procedure proc_updatestatus(@testid varchar(30))
+as
+begin
+update paymentdetail set teststatus='Cancel'
+where testid=@testid
+end
+
+exec proc_updatestatus 't3'
